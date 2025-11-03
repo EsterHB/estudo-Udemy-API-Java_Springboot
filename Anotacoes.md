@@ -32,7 +32,11 @@ Utlizado em filtros, paginação, ordenação etc. Só passa parâmetros para a 
 
 
 
+<<<<<<< HEAD
 \_\_\_
+=======
+___
+>>>>>>> branch-teste1
 
 
 
@@ -56,9 +60,15 @@ public User getUser(@PathVariable Long id) {
 
 
 
+<<<<<<< HEAD
 \_\_\_
 
 \_\_\_
+=======
+___
+
+___
+>>>>>>> branch-teste1
 
 
 
@@ -66,6 +76,28 @@ public User getUser(@PathVariable Long id) {
 
 # Arquitetura e Estrutura do Framework 
 
+<<<<<<< HEAD
+=======
+- Container Spring; 
+- Componentes Spring;
+- Application Context; 
+- Scan de Componentes;
+- Configurações (Configutions) e Beans; 
+- Application.yml/properties e Profiles (ambientes).
+
+## Spring Framework e Spring Boot
+Para que o Spring Boot exista é necessário o Spring Framework, que é o core, o coração do Spring Boot é o que faz com que o Spring Boot funcione.
+Spring Boot é o agregador, é como se fosse o bolo completo.
+
+## Container Spring 
+Componente principal de uma aplicação Spring. É formado por Configuration e Components.<br>
+
+A configuration pode possuir vários beans e application.yml/properties.<br>
+
+Components são componentes específicos, como por exemplo Services (lógica de negócio, camada lógica), Repositories (acesso a dados, como SQL e No SQL), Controllers (por exemplo Rest Controllers de API Rest, que recebe as requisições).<br><br>
+
+## 
+>>>>>>> branch-teste1
 
 
 
