@@ -30,13 +30,8 @@ public List<User> getUsers(@RequestParam String name){
 
 Utlizado em filtros, paginação, ordenação etc. Só passa parâmetros para a URL e não faz parte do caminho.
 
-
-
-<<<<<<< HEAD
-\_\_\_
-=======
 ___
->>>>>>> branch-teste1
+
 
 
 
@@ -58,26 +53,12 @@ public User getUser(@PathVariable Long id) {
 
 }
 
-
-
-<<<<<<< HEAD
-\_\_\_
-
-\_\_\_
-=======
 ___
-
 ___
->>>>>>> branch-teste1
-
-
-
-
 
 # Arquitetura e Estrutura do Framework 
 
-<<<<<<< HEAD
-=======
+
 - Container Spring; 
 - Componentes Spring;
 - Application Context; 
@@ -96,8 +77,6 @@ A configuration pode possuir vários beans e application.yml/properties.<br>
 
 Components são componentes específicos, como por exemplo Services (lógica de negócio, camada lógica), Repositories (acesso a dados, como SQL e No SQL), Controllers (por exemplo Rest Controllers de API Rest, que recebe as requisições).<br><br>
 
-## 
->>>>>>> branch-teste1
 
 
 
