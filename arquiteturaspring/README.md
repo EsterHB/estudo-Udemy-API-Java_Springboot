@@ -102,3 +102,5 @@ public class TestefabricaController {
 }
 
 ```
+Dessa forma, as @Qualifier serão definidas conforme o name dos Beans, definido durante sua criação dentro da classe
+@Configuration. 
