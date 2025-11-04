@@ -4,6 +4,7 @@ import io.github.cursodsousa.arquiteturaspring.montadora.Motor;
 import io.github.cursodsousa.arquiteturaspring.montadora.TipoMotor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 
 // Definição dos beans pode ser feita dentro da @Configuration. Os beans são componenetes que serão utilizados em algum momento na aplicação.
 // Em geral, um bean é um componente que pode ser complexo, como uma conexão com banco de dados,
@@ -16,6 +17,7 @@ public class MontadoraConfiguration {
 
     @Bean(name = "motorAspirado")
     // Bean é um método que retorna um objeto construído
+    @Primary // define qe é o Bean primário, padrão
     public Motor motorAspirado (){
         var motor = new Motor();
         motor.setCavalos(120);
