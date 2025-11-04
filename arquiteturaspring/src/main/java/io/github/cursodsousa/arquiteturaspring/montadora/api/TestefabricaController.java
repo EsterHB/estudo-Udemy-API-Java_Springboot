@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestefabricaController {
 
     @Autowired //"Spring vá até seu container e me traga uma instância de Motor que vc já tem e injete aqui"
-    @Qualifier("motorEletrico") //@Qualifier é o nome do bean
+    @Aspirado //Annotation do @Aspirado definida no package de api
+    //@Qualifier("motorEletrico") //@Qualifier é o nome do bean
     private Motor motor;
 
     @PostMapping

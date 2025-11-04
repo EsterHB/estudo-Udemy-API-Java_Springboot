@@ -67,3 +67,38 @@ public class MontadoraConfiguration {
     }
 }
 ``` 
+
+### Criação de Annotations
+Podemos criar nossas próprias annotations, basta criar a classe do tipo Annotation e definir qual bean queremos utilizar via @Qualifier.
+
+Criar nossas próprias annotations é indicado para quando há vários beans, assim podemos especificar qual bean utilizaremos.
+Como no exemplo a seguir: 
+
+```
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.FIELD, ElementType.METHOD })
+@Qualifier("motorAspirado")
+public @interface Aspirado {
+}
+```
+
+Assim, utilizando a annotation criada na classe TestefabricaController fica: 
+
+```
+@RestController
+@RequestMapping("/carros")
+public class TestefabricaController {
+
+    @Autowired //"Spring vá até seu container e me traga uma instância de Motor que vc já tem e injete aqui"
+    @Aspirado //Annotation do @Aspirado definida no package de api
+    //@Qualifier("motorEletrico") //@Qualifier é o nome do bean
+    private Motor motor;
+
+    @PostMapping
+    public CarroStatus ligarCarro(@RequestBody  Chave chave) {
+        var carro = new HondaHRV(motor);
+        return carro.darIgnicao(chave);
+    }
+}
+
+```
