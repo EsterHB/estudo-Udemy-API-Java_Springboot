@@ -104,3 +104,57 @@ public class TestefabricaController {
 ```
 Dessa forma, as @Qualifier serão definidas conforme o name dos Beans, definido durante sua criação dentro da classe
 @Configuration. 
+___
+___
+Perfeito, Ester! Seu resumo está ótimo como ponto de partida — você captou bem a estrutura básica de uma aplicação Spring Boot. Fiz uma revisão completa, corrigi a gramática, melhorei a clareza e complementei com explicações úteis. Aqui está a versão final formatada em **Markdown** para você colocar no seu GitHub:
+
+---
+
+## Estudo sobre Camadas em uma API Spring Boot
+
+### Controller
+- Responsável por receber as requisições HTTP e encaminhá-las para o serviço apropriado.
+- Atua como ponte entre o cliente (frontend ou outro sistema) e a lógica de negócio.
+- Injeta o `Service` para executar as operações necessárias.
+
+### Service
+- Representa a **lógica de negócio** da aplicação.
+- É onde ocorre o processamento mais pesado da API.
+- Pode acionar:
+    - A camada de persistência (`Repository`)
+    - Outras APIs externas
+    - Componentes auxiliares (como utilitários, validadores, etc.)
+- Normalmente é a camada com **mais injeções de dependência**.
+- Não acessa diretamente o banco de dados — isso é feito indiretamente via `Repository`.
+- Um `Service` pode existir sem depender de um `Repository`, especialmente quando lida com integrações externas ou lógica pura.
+
+###  Repository
+- Responsável por **acessar diretamente o banco de dados**.
+- Utiliza o Spring Data JPA para facilitar operações como `save`, `findById`, `delete`, etc.
+- É um **bean gerenciado pelo Spring**, assim como o `Service` e o `Controller`.
+- Não depende de nenhuma outra camada — é a base da persistência.
+
+###  Relação entre as camadas
+```plaintext
+[Controller] → depende do → [Service]
+[Service] → depende do → [Repository] (e outros componentes)
+[Repository] → não depende de ninguém
+```
+
+###  Observações
+- A injeção de dependência é feita via `@Autowired`, construtor ou outras formas suportadas pelo Spring.
+- Todas essas camadas são **beans**, ou seja, são gerenciadas pelo contêiner do Spring.
+- O uso de boas práticas como separação de responsabilidades e injeção de dependência facilita testes, manutenção e escalabilidade da aplicação.
+
+___
+___
+
+# Observações
+
+Em Java, com Spring, só é necessário injetar uma classe se ela representar uma dependência **funcional**, ou seja, se precisarmos utilizar seus
+métodos (comportamentos). Assim, ao invés de utilizar classes tradicionais par ainjeção de depndência, é recomendado utilizar interfaces, pois o
+uso de interfaces, nesse caso, promoverá desacoplamento (independência entre componentes, se um mudar não interfere nos demais), maiores testabilidade 
+e flexibilidade. As interfaces geralmente possuem apenas métodos abstratos (metodo apenas declarado, sem corpo, pois ele será implementado por outra classe)
+e constantes (variáveis que são automaticamente *public static final*) como atributos.
+
+
