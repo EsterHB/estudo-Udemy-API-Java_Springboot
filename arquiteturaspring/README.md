@@ -151,10 +151,65 @@ ___
 
 # Observações
 
-Em Java, com Spring, só é necessário injetar uma classe se ela representar uma dependência **funcional**, ou seja, se precisarmos utilizar seus
+* Em Java, com Spring, só é necessário injetar uma classe se ela representar uma dependência **funcional**, ou seja, se precisarmos utilizar seus
 métodos (comportamentos). Assim, ao invés de utilizar classes tradicionais par ainjeção de depndência, é recomendado utilizar interfaces, pois o
 uso de interfaces, nesse caso, promoverá desacoplamento (independência entre componentes, se um mudar não interfere nos demais), maiores testabilidade 
 e flexibilidade. As interfaces geralmente possuem apenas métodos abstratos (metodo apenas declarado, sem corpo, pois ele será implementado por outra classe)
 e constantes (variáveis que são automaticamente *public static final*) como atributos.
 
+
+* O @Component é o pai de todas as outras annotations de stereotypes.
+
+
+* Quando uma classe é anotada com @Repository, ela será otimizada para trabalhar com banco de dados.
+
+## Injeção de dependências 
+
+Há três formas de injetar dependências:
+
+* **Com @Autowired**, **injeção via propriedade/injeção por campo**, injeta diretamente, sem precisar de construtor;
+```
+@Autowired 
+private TodoValidator validator;
+
+public void usandoValidatorDiretamente(){
+    var todo = new TodoEntity();
+    validator.validar(todo);
+}
+```
+
+É uma forma simples de injeção, mas não a mais recomendada por boas práticas porque dificulta testes. O ideal é injeção via construtor.
+Além disso, com apenas @Autowired não denota-se nem obrigatoriedade e nem opcionalidade, além de que a instância (no caso do exemplo, validator) não pode ser modificada.
+
+<br>
+
+* **Com método setter**, deve utilizar o @Autowired. É uma forma menos comum de se utilizar, porque ela nos diz que a dependência por outro 
+objeto é opcional. Assim, podemos interpretar que, pelo exemplo a seguir, o objeto BeanGerenciado pode ou não depender do objeto TodoValidator.
+Denotando, portanto, a **não obrigatoriedade**.
+
+```
+@Autowired
+public void setValidator ( TodoValidator validator){
+    this.validator = validator;
+} 
+```
+
+<br> 
+
+* **Via construtor**, a recomendada, pode ou não utilziar o @Autowired. O ideal é usar construtor pela obrigatoriedade, ou seja, para construir um
+objeto do tipo BeanGerenciado precisamos do objeto do tipo (TodoValidator validator), expressando a obrigatoriedade de dependência específica.
+Assim, o código abaixo nos diz que o BeanGerenciado **NECESSITA obrigatoriamente** do objeto do tipo TodoValidator.
+
+```
+@Component
+public classe BeanGerenciado {
+    
+    @Autowired // opcional utilizar
+    public BeanGerenciado(TodoValidator validator){
+        this.validator = validator;
+    }
+    
+}
+
+```
 
