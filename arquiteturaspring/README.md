@@ -212,4 +212,39 @@ public classe BeanGerenciado {
 }
 
 ```
+## Outras observações
+
+* Lazy -> significa que o bean só será carregado quando for utilizado. Assim, quando a aplicação é inicializada, os beans que tiverem a anotação @Lazy só
+será instanciado quando ele for acionado. 
+
+## Arquivos de configuração externalizada application properties
+
+* Há o tipo .xml (pom.xml) e o tipo .yml (application.yml) para fazer as configurações externalizadas. O mais moderno é o application.yml. 
+
+* Não pode utilizar as duas ao mesmo tempo, apenas uma!
+
+````
+//application.yml
+
+spring: 
+    application:
+        name: Arquitetura Spring
+    jpa: 
+        show-sql: true
+    main:
+        lazy-initialization: false
+    
+````
+
+````
+//application.properties (pom.xml)
+
+spring.application.name=arquiteturaspring
+
+spring.jpa.shou_sql=true
+
+spring.main.lazy-initialization=false
+
+````
+
 
