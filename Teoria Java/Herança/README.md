@@ -82,3 +82,56 @@ ___
 
 ## Sobreposição, palavra super, anotação @Override
 
+### Sobreposição ou Sobrescrita
+
+É a implementação de um método de uma superclasse na subclasse.
+
+É fortemente recomendável utilizar a anotação @Override em um método sobrescrito porque facilita a leitura e comprensão do código e também avisamos ao compilador sobre essa sobrescrita, obedecendo boas práticas.
+
+Por exemplo, suponha que temos duas contas, a superclasse Conta e a subclasse ContaPoupanca, que herda a superclasse Conta. Na classe Conta há o método de saque, que cobra uma taxa de 5.0 sobre o valor do saque. Na ContaPoupanca não é cobrada essa taxa nos saques, mas ela herda o método saque da Conta, temos que adequar o método de saque na ContaPoupanca e tirar a taxa. Para isso é muito simples, basta sobrescrever o método saque na ContaPoupanca.
+
+``` Java
+
+// Na Conta: 
+public void saque (double valorSaque){
+  saldo -= valorSaque + 5.00;
+}
+
+// Na ContaPoupanca:
+
+@Override
+public void saque (double valorSaque){
+  saldo -= valorSaque;
+}
+```
+
+### Palavra super 
+
+É possível realizar a implementação da superclasse usando a palavra ***super***.
+
+Suponha que o banco mudou as políticas de contas, agora na ContaPoupanca quando o cliente fizer o saque vai ser cobrado, além da taxa presente no método de saque na classe Conta, também será cobrada outra taxa de valor 2.00. Então fica: 
+
+``` Java 
+
+// ContaPoupanca modificada:
+@Override
+public void saque (double valorSaque){
+  super.saque(valorSaque);
+  saldo -= 2.00;
+}
+```
+
+O super também é utilizado em construtores.
+
+### Classes e métodos final 
+
+* Palavra chave: final;
+
+* Classe: evita que a classe seja herdada:
+
+``` Java 
+public final class SavingsAccount {}
+```
+
+* Método: evita que o método seja sobreposto;
+
