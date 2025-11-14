@@ -1,3 +1,149 @@
+# Pilares da OOP (Object-Oriented Programming)
+
+Relembrando dos pilares da Programação Orientada a Objetos:
+
+* **Encapsulamento**
+* **Herança**
+* **Polimorfismo**
+___
+
+## Classes utilizadas nos exemplos
+
+UML
+
+![Exemplo de Down e Upcasting](./downUpCasting.png)
+
+
+
+``` Java 
+
+//Superclasse Account
+
+public class Account{
+
+  private Integer number;
+  private String holder;
+  protected Double balance; //nao recomendado o protected em APIs*
+
+  public Account(){}
+
+  public Account (Integer number, String holder, Double balance){
+    this.number = number;
+    this.holder = holder;
+    this.balance = balance;
+  }
+
+  public void setNumber (Integer number){
+    this.number = number;
+  }
+
+  public void setHolder (String holder){
+    this.holder = holder;
+  }
+
+  public void setBalance (Double balance){
+    this.balance = balance;
+  }
+
+  public Integer getNumber(){
+    return number;
+  }
+
+  public String getHolder(){
+    return holder;
+  }
+
+  public Double getBalance(){
+    return balance;
+  }
+
+  public void withdraw (Double amount){
+    balance -= amount + 5.0;
+  }
+
+  public void deposit (Double amount){
+    balance += amount;
+  }
+}
+
+//Subclasse BusinessAccount 
+
+public class BusinessAccount extends Account {
+  private Double loanLimit;
+  public BusinessAccount () {
+    super();
+  }
+  public BusinessAccount (Integer number, String holder,Double balance, Double loanLimit){
+    super(number, holder, balance);
+    this.loanLimit = loanLimit;
+  }
+
+  public Double getLoanLimit(){
+    return loanLimit;
+  }
+  public void setLoanLimit(Double loanLimit){
+    this.loanLimit = loanLimit;
+  }
+  public void loan (Double amount){
+    if (amount <= loanLimit){
+      balance += amount - 10.0;
+    }
+  }
+
+  @Override
+  public void withdraw (Double amount){
+    super.withdraw(amount);
+    balance -= 2.0;
+  }
+}
+
+//Subclasse SavingsAccount
+
+public class SavingsAccount extends Account {
+
+  private Double interestRate;
+
+  public SavingsAccount(){
+    super();
+  }
+
+  public SavingsAccount (Integer number, String holder, Double balance, Double interestRate) {
+    super(number, holder, balance);
+    this.interestRate = interestRate;
+  }
+
+  public void setInterestRate (Double interestRate){
+    this.interestRate = interestRate;
+  }
+
+  public Double getInterestRate() {
+    return interestRate;
+  }
+
+  @Override
+  public void withdraw (Double amount){
+    balance -= amount;
+  }
+
+  public void updateBalance (){
+    balance += balance * interestRate;
+  }
+}
+
+```
+( * ) Por que protected não é recomendado e APIs?
+
+* **Quebra de encapsulamento ->** permite que subclasses acessem diretamente atributos da superclasse, o que pode levar a alterações não controladas;
+
+* **Dificulta a manutenção e evolução ->** quando várias subclasses têm acesso direto a atributos protected, qualque rmudança na estrutura interna da subclasse pode quebrar o código em vários lugares;
+
+* **Exposição desnecessária ->** protected expõe dados para herança, mesmo que não sejam relevantes para todas subclasses;
+
+* **Segurança e integridade de dados ->** o ideal é usar private nos atributos, com métodos bem definidos, garaintindo que o acesso aos dados seja sempre controlado e validado.
+
+
+___
+
 # Herança 
 
 * É um tipo de associação que permite que uma class herde dados e comportamentos de outra classe;
@@ -133,5 +279,41 @@ O super também é utilizado em construtores.
 public final class SavingsAccount {}
 ```
 
-* Método: evita que o método seja sobreposto;
+* Se usado no método evita que o método seja sobreposto;
+
+#### Por que usar final?
+
+* Segurança: dependendo das regras do negócio, as vezes é desejável garantir que uma classe não seja herdada, ou que um método não seja sobreposto
+
+  * Geralmente convém acrescentar final em **métodos sobrepostos**, pois **sobreposições mnúltiplas** podem ser uma porta de entrada para inconsistências! 
+
+* Performance: atributos de tipo de uma classe final são analisados de forma mais rápida em tempo de execução; 
+
+  * Exemplo clássico: String é uma classe final, não deixa ue a classe String seja sobrescrita.
+
+___
+
+# Polimorfismo 
+
+Em POO polimorfismo é o recurso que permite que **variáveis de um mesmo tipo mais genérico possam apontar para objetos de tipos específicos diferentes**, tendo assim comportamentos diferentes conforme cada tipo específico.
+
+Ou seja, polimorfismo é a capacidade de um mesmo método ou função se comportar de maneiras diferentes dependendo do objeto que o invoca. Permite que diferentes classes implementem o mesmo método de formas difrentes, o que torna o código flexível e reutilizável. 
+
+Utilizando o exemplo anterior, temos a Account que é a superclasse, e a classe SavingsAccount como subclasse que herda de Account. Assim podemos criar x e y que são do tipo Account, sendo que x contém um objeto da classe Account e y contém um objeto da subclasse SavingsAccount: 
+
+``` Java
+
+
+
+
+
+Account x = new Account(1020, "Alex");
+Account y = new SavingsAccount(1023, "Maria", 0.01);
+
+x.withdraw(50.0);
+y.withdraw(50.0);
+
+```
+
+
 
