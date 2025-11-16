@@ -303,10 +303,6 @@ Utilizando o exemplo anterior, temos a Account que é a superclasse, e a classe 
 
 ``` Java
 
-
-
-
-
 Account x = new Account(1020, "Alex");
 Account y = new SavingsAccount(1023, "Maria", 0.01);
 
@@ -314,6 +310,6 @@ x.withdraw(50.0);
 y.withdraw(50.0);
 
 ```
-
+ 
 
 
