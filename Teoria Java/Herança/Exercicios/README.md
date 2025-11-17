@@ -14,3 +14,15 @@ As instanciações da superclasse Employee e da subclasse OutSourcedEmployee for
 * Mantém o escopo limpo, ou seja, declarar dentro do laço for garante que cada objeto só exista durante aquela iteração, evitando confusão e uso indevido fora do contexto;
 
 * **Por fim, o motivo principal: para inserir os valores corretamente na lista e exibir o print como foi pedido.** 
+___
+
+Observe que foi criada uma lista do tipo da superclasse, mas os objetos instanciados dentro dos id dentro do laço for são do tipo das subclasses... a pergunta é "Isso dá algum problema? Pois a lista é de um tipo (superclasse) e os objetos adicionados a ela são de outro, no caso subclasses. Entçao não seria necessário fazer upcasting?". E a resposta é **"Nesse caso não precisa fazer upcasting!"**, pois o **upcasting nesse caso é feito automaticamente"**. Além disso, no caso, precisamos utilizar métodos específicos de cada subclasse, então não convém fazer upcasting, pois se fizer o upcasting não dá ára utilizar os métodos particulares de cada subclasse. Sendo assim, o upcasting é mais indicado quando for tratar dos bojetos de forma mais genérica com métodos e atributos somente da superclasse.
+
+___
+___
+
+# Exercício 2 
+
+![Exercício 2](./Exercicio_2.png)
+
+![Saída esperada do exercício 2](./saida_esperada_ex2.png)
