@@ -1,9 +1,0 @@
-/**
- * 
- */
-/**
- * @author ester
- *
- */
-module Heranca {
-}
